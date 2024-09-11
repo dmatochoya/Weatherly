@@ -1,10 +1,17 @@
+// React and ReactDOM imports
 import { StrictMode } from "react";
-import { ThemeProvider } from "styled-components";
 import { createRoot } from "react-dom/client";
+
+// Third-party libraries
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// Local imports
+import { store } from "./app/store";
+import theme from "./styles/theme";
 import Home from "./pages/Home/Home";
 import GlobalStyle from "./styles/GlobalStyle";
-import theme from "./styles/theme";
 
 const router = createBrowserRouter([
   {
@@ -20,9 +27,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </StrictMode>
 );
