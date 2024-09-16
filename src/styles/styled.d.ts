@@ -10,10 +10,10 @@ declare module "styled-components" {
       primary: string;
       secondary: string;
       hover: string;
-      disabled: string;
       background: string;
       text: string;
       error: string;
+      lightgray: string;
     };
   }
 }
