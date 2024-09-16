@@ -54,7 +54,7 @@ function CurrentWeather({
           </Styled.ChangeTempUnitButton>
         </Styled.MainWeatherCard>
         <Styled.ItemWeatherCardsFlexContainer $flexWrap="wrap" $gap="1rem">
-          {currentWeatherCardsData.map(({ title, value, iconName }) => (
+          {currentWeatherCardsData.map(({ title, value, iconSrc }) => (
             <Styled.ItemWeatherCard key={title}>
               <div>
                 <Styled.ItemWeatherCardTitle>
@@ -64,10 +64,7 @@ function CurrentWeather({
                   {value}
                 </Styled.ItemWeatherCardValue>
               </div>
-              <Styled.ItemWeatherCardIcon
-                src={`/src/assets/${iconName}.svg`}
-                alt={`${iconName} icon`}
-              />
+              <Styled.ItemWeatherCardIcon src={iconSrc} alt={`${title} icon`} />
             </Styled.ItemWeatherCard>
           ))}
         </Styled.ItemWeatherCardsFlexContainer>

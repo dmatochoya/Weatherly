@@ -1,4 +1,8 @@
 import convertTemperature from "./convertTemperature";
+import temperatureLogo from "../assets/temperature.svg";
+import rainLogo from "../assets/rain.svg";
+import humidityLogo from "../assets/humidity.svg";
+import windLogo from "../assets/wind.svg";
 import type WeatherSliceState from "../types/weatherSliceTypes";
 import type { ForecastWeatherApiResponse } from "../types/apiTypes";
 
@@ -106,22 +110,22 @@ export const getCurrentWeatherCardsData = (
         currentWeather?.main.temp_min ?? 0,
         currentTempUnit
       )}°`,
-      iconName: "temperature",
+      iconSrc: temperatureLogo,
     },
     {
       title: "Rain",
       value: `${currentWeather?.pop ?? "\u00A0\u00A0"}%`,
-      iconName: "rain",
+      iconSrc: rainLogo,
     },
     {
       title: "Humidity",
       value: `${currentWeather?.main.humidity}%`,
-      iconName: "humidity",
+      iconSrc: humidityLogo,
     },
     {
       title: "Wind",
       value: `${currentWeather?.wind?.speed} m/s`,
-      iconName: "wind",
+      iconSrc: windLogo,
     },
   ];
 

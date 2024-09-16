@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import searchIcon from "../../assets/search.svg";
 
 export const AppTitle = styled.h1<{ $fontSize: string; $isClickable: boolean }>`
   font-size: ${({ $fontSize }) => $fontSize};
@@ -16,9 +17,7 @@ export const SearchInputContainer = styled.div`
   position: relative;
 `;
 
-export const SearchIcon = styled.img.attrs({
-  src: "src/assets/search.svg",
-})`
+export const SearchIcon = styled.img.attrs({ src: searchIcon })`
   position: absolute;
   top: 0.75rem;
   left: 1rem;
