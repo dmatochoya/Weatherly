@@ -7,5 +7,4 @@ export const Section = styled.section`
   align-items: center;
   gap: 1.6rem;
   height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
 `;

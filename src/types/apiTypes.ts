@@ -9,20 +9,22 @@ type CityData = {
 };
 
 type WeatherData = {
-  weather: [{ icon: string }];
+  weather: [{ icon: string; description: string }];
   main: {
-    temp: number;
+    temp?: number;
     temp_min: number;
     temp_max: number;
-    humidity: number;
+    humidity?: number;
   };
-  wind: {
+  wind?: {
     speed: number;
   };
   dt: number;
-  timezone: number;
+  dt_txt?: string;
+  timezone?: number;
+  pop?: number;
 };
 
-export type GeocodingApiResponse = Array<Coordinates & CityData>;
+export type GeocodingApiResponse = (Coordinates & CityData)[];
 export type CurrentWeatherApiResponse = WeatherData;
-export type WeatherForecastApiResponse = Array<WeatherData & { pop?: number }>;
+export type ForecastWeatherApiResponse = { list: WeatherData[] };

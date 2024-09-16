@@ -1,8 +1,8 @@
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
-// import { savedCitiesSlice } from "../features/saved-cities/savedCitiesSlice"
 import { weatherApiSlice } from "../features/search-weather/weatherApiSlice";
+import { weatherSlice } from "../features/search-weather/weatherSlice";
 
-const rootReducer = combineSlices(weatherApiSlice);
+const rootReducer = combineSlices(weatherApiSlice, weatherSlice);
 
 export type RootState = ReturnType<typeof rootReducer>;
 
