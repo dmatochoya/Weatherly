@@ -1,18 +1,27 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   useLazyGetCityCoordinatesQuery,
   useLazyGetCurrentWeatherQuery,
-  useLazyGetWeatherForecastQuery,
+  useLazyGetForecastWeatherQuery,
 } from "./weatherApiSlice";
-import * as Styled from "./SearchWeather.styles";
+import useEnterKeyListener from "../../hooks/useEnterKeyListener";
+import * as StyledCommon from "../../common/components/styled";
+import * as StyledSearch from "./SearchWeather.styles";
+
+const Styled = { ...StyledSearch, Common: { ...StyledCommon } };
 
 function SearchWeather() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isInputError, setIsInputError] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   const [getCityCoordinates] = useLazyGetCityCoordinatesQuery();
   const [getCurrentWeather] = useLazyGetCurrentWeatherQuery();
-  const [getWeatherForecast] = useLazyGetWeatherForecastQuery();
+  const [getForecastWeather] = useLazyGetForecastWeatherQuery();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -23,49 +32,71 @@ function SearchWeather() {
     }
   };
 
-  const handleSearchButtonClick = async () => {
-    if (searchTerm.length === 0) {
+  const handleSearch = async () => {
+    if (searchTerm.trim().length === 0) {
       setIsInputError(true);
       return;
     }
 
+    setSearchTerm("");
+
     try {
       const coordinatesResponse = await getCityCoordinates(searchTerm).unwrap();
 
-      if (coordinatesResponse.length) {
+      if (coordinatesResponse.length > 0) {
         const { lon, lat } = coordinatesResponse[0];
 
-        await getCurrentWeather({ lon, lat }).unwrap();
-        await getWeatherForecast({ lon, lat }).unwrap();
+        await Promise.all([
+          getCurrentWeather({ lon, lat }).unwrap(),
+          getForecastWeather({ lon, lat }).unwrap(),
+        ]);
+
+        if (isHomePage) {
+          navigate("/weather");
+        }
       } else {
         setIsInputError(true);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      const errorMessage =
+        error instanceof Error
+          ? `Error fetching data: ${error.message}`
+          : "Unknown error occurred";
+      console.error(errorMessage);
+
       setIsInputError(true);
     }
+  };
 
-    setSearchTerm("");
+  useEnterKeyListener(handleSearch);
+
+  const handleAppTitleClick = () => {
+    if (!isHomePage) {
+      navigate("/");
+    }
   };
 
   return (
     <>
-      <Styled.AppTitle $fontSize="6.5rem">Weatherly</Styled.AppTitle>
+      <Styled.AppTitle
+        $fontSize={isHomePage ? "6.5rem" : "2.6rem"}
+        $isClickable={!isHomePage}
+        onClick={handleAppTitleClick}
+      >
+        Weatherly
+      </Styled.AppTitle>
       <Styled.SearchInputContainer>
         <Styled.SearchIcon />
         <Styled.SearchInput
           value={searchTerm}
           onChange={handleInputChange}
-          name="citySearch"
           $isError={isInputError}
         />
         <Styled.InputErrorHelperText hidden={!isInputError}>
           The information was not valid
         </Styled.InputErrorHelperText>
       </Styled.SearchInputContainer>
-      <Styled.SearchButton onClick={handleSearchButtonClick}>
-        Search
-      </Styled.SearchButton>
+      <Styled.Common.Button onClick={handleSearch}>Search</Styled.Common.Button>
     </>
   );
 }

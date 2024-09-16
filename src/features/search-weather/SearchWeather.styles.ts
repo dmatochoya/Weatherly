@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const AppTitle = styled.h1<{ $fontSize: string }>`
+export const AppTitle = styled.h1<{ $fontSize: string; $isClickable: boolean }>`
   font-size: ${({ $fontSize }) => $fontSize};
   font-weight: 700;
   background: linear-gradient(93deg, #136aab 1.87%, #b0e0f5 96.48%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  cursor: ${({ $isClickable }) => $isClickable && "pointer"};
 `;
 
 export const SearchInputContainer = styled.div`
@@ -16,7 +17,7 @@ export const SearchInputContainer = styled.div`
 `;
 
 export const SearchIcon = styled.img.attrs({
-  src: "src/assets/search-icon.svg",
+  src: "src/assets/search.svg",
 })`
   position: absolute;
   top: 0.75rem;
@@ -26,6 +27,7 @@ export const SearchIcon = styled.img.attrs({
 export const SearchInput = styled.input.attrs<{ $isError: boolean }>({
   type: "search",
   placeholder: "Search for a city...",
+  name: "citySearch",
 })`
   font-size: 1.17rem;
   width: 30rem;
@@ -57,19 +59,4 @@ export const InputErrorHelperText = styled.span`
   font-weight: 300;
   color: ${({ theme }) => theme.colors.error};
   padding: 0.3rem 0 0 1.3rem;
-`;
-
-export const SearchButton = styled.button`
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
-  width: 9.2rem;
-  height: 2.8rem;
-  border-radius: 50px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.hover};
-  }
 `;
