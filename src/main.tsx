@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
+import { Analytics } from "@vercel/analytics/react";
 
 // Local imports
 import { store } from "./app/store";
@@ -44,6 +45,7 @@ createRoot(document.getElementById("root")!).render(
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <RouterProvider router={router} />
+        <Analytics />
       </ThemeProvider>
     </Provider>
   </StrictMode>
