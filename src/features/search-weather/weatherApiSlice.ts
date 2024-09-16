@@ -3,10 +3,18 @@ import type {
   Coordinates,
   GeocodingApiResponse,
   CurrentWeatherApiResponse,
-  WeatherForecastApiResponse,
+  ForecastWeatherApiResponse,
 } from "../../types/apiTypes";
 
 const apiKey = import.meta.env.VITE_API_KEY;
+
+interface BuildEndpointParams {
+  coords: Coordinates;
+  apiCallType: string;
+}
+
+const buildEndpoint = ({ coords, apiCallType }: BuildEndpointParams) =>
+  `data/2.5/${apiCallType}?lat=${coords.lat}&lon=${coords.lon}&units=metric&appid=${apiKey}`;
 
 export const weatherApiSlice = createApi({
   baseQuery: fetchBaseQuery({
@@ -18,12 +26,15 @@ export const weatherApiSlice = createApi({
       query: (city) => `geo/1.0/direct?q=${city}&appid=${apiKey}`,
     }),
     getCurrentWeather: build.query<CurrentWeatherApiResponse, Coordinates>({
-      query: ({ lat, lon }) =>
-        `data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+      query: (coords) => buildEndpoint({ coords, apiCallType: "weather" }),
     }),
-    getWeatherForecast: build.query<WeatherForecastApiResponse, Coordinates>({
-      query: ({ lat, lon }) =>
-        `data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+    getForecastWeather: build.query<
+      ForecastWeatherApiResponse["list"],
+      Coordinates
+    >({
+      query: (coords) => buildEndpoint({ coords, apiCallType: "forecast" }),
+      transformResponse: (response: ForecastWeatherApiResponse) =>
+        response.list,
     }),
   }),
 });
@@ -31,5 +42,5 @@ export const weatherApiSlice = createApi({
 export const {
   useLazyGetCityCoordinatesQuery,
   useLazyGetCurrentWeatherQuery,
-  useLazyGetWeatherForecastQuery,
+  useLazyGetForecastWeatherQuery,
 } = weatherApiSlice;
