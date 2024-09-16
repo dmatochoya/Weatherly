@@ -6,22 +6,35 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 
 // Local imports
 import { store } from "./app/store";
 import theme from "./styles/theme";
-import Home from "./pages/Home/Home";
 import GlobalStyle from "./styles/GlobalStyle";
+import GlobalErrorFallback from "./common/components/GlobalErrorFallback";
+import NotFoundPage from "./pages/NotFoundPage";
+import Home from "./pages/Home/Home";
+import WeatherDashboard from "./pages/WeatherDashboard/WeatherDashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-    // TODO: Add ErrorBoundary
+    element: (
+      <ErrorBoundary FallbackComponent={GlobalErrorFallback}>
+        <Home />
+      </ErrorBoundary>
+    ),
+    errorElement: <NotFoundPage />,
   },
   {
-    path: "dashboard",
-    element: <div>Dashboard</div>,
+    path: "/weather",
+    element: (
+      <ErrorBoundary FallbackComponent={GlobalErrorFallback}>
+        <WeatherDashboard />
+      </ErrorBoundary>
+    ),
+    errorElement: <NotFoundPage />,
   },
 ]);
 
