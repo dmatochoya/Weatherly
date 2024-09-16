@@ -6,6 +6,7 @@ import type {
   ForecastWeatherApiResponse,
 } from "../../types/apiTypes";
 
+const isLocal = import.meta.env.MODE === "development";
 const apiKey = import.meta.env.VITE_API_KEY;
 
 interface BuildEndpointParams {
@@ -18,21 +19,30 @@ const buildEndpoint = ({ coords, apiCallType }: BuildEndpointParams) =>
 
 export const weatherApiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.openweathermap.org/",
+    baseUrl: isLocal ? "https://api.openweathermap.org" : "/api", // Use OpenWeather API locally, serverless functions in production
   }),
   reducerPath: "weatherApi",
-  endpoints: (build) => ({
-    getCityCoordinates: build.query<GeocodingApiResponse, string>({
-      query: (city) => `geo/1.0/direct?q=${city}&appid=${apiKey}`,
+  endpoints: (builder) => ({
+    getCityCoordinates: builder.query<GeocodingApiResponse, string>({
+      query: (city) =>
+        isLocal
+          ? `geo/1.0/direct?q=${city}&appid=${apiKey}` // OpenWeather API directly for local development
+          : `getCityCoordinates?city=${city}`, // Use serverless function in production
     }),
-    getCurrentWeather: build.query<CurrentWeatherApiResponse, Coordinates>({
-      query: (coords) => buildEndpoint({ coords, apiCallType: "weather" }),
+    getCurrentWeather: builder.query<CurrentWeatherApiResponse, Coordinates>({
+      query: (coords) =>
+        isLocal
+          ? buildEndpoint({ coords, apiCallType: "weather" }) // Direct OpenWeather API call
+          : `getCurrentWeather?lat=${coords.lat}&lon=${coords.lon}`, // Serverless function in production
     }),
-    getForecastWeather: build.query<
+    getForecastWeather: builder.query<
       ForecastWeatherApiResponse["list"],
       Coordinates
     >({
-      query: (coords) => buildEndpoint({ coords, apiCallType: "forecast" }),
+      query: (coords) =>
+        isLocal
+          ? buildEndpoint({ coords, apiCallType: "forecast" }) // Direct API call in development
+          : `getForecastWeather?lat=${coords.lat}&lon=${coords.lon}`, // Serverless function in production
       transformResponse: (response: ForecastWeatherApiResponse) =>
         response.list,
     }),
