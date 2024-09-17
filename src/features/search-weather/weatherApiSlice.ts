@@ -9,12 +9,12 @@ import type {
 const isLocal = import.meta.env.MODE === "development";
 const apiKey = import.meta.env.VITE_API_KEY;
 
-interface BuildEndpointParams {
+interface BuildQueryStringParams {
   coords: Coordinates;
   apiCallType: string;
 }
 
-const buildEndpoint = ({ coords, apiCallType }: BuildEndpointParams) =>
+const buildQueryString = ({ coords, apiCallType }: BuildQueryStringParams) =>
   isLocal
     ? `data/2.5/${apiCallType}?lat=${coords.lat}&lon=${coords.lon}&units=metric&appid=${apiKey}` // OpenWeather API direct call for local development
     : `getWeatherData?lat=${coords.lat}&lon=${coords.lon}&apiCallType=${apiCallType}`; // Serverless function in production
@@ -32,13 +32,13 @@ export const weatherApiSlice = createApi({
           : `getCityCoordinates?city=${city}`, // Use serverless function in production
     }),
     getCurrentWeather: builder.query<CurrentWeatherApiResponse, Coordinates>({
-      query: (coords) => buildEndpoint({ coords, apiCallType: "weather" }),
+      query: (coords) => buildQueryString({ coords, apiCallType: "weather" }),
     }),
     getForecastWeather: builder.query<
       ForecastWeatherApiResponse["list"],
       Coordinates
     >({
-      query: (coords) => buildEndpoint({ coords, apiCallType: "forecast" }),
+      query: (coords) => buildQueryString({ coords, apiCallType: "forecast" }),
       transformResponse: (response: ForecastWeatherApiResponse) =>
         response.list,
     }),
