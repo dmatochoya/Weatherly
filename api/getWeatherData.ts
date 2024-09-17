@@ -20,7 +20,7 @@ module.exports = async function handler(
 
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/${apiCallType}?lat=${lat}&lon=${lon}&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/${apiCallType}?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
     );
     const data = await response.json();
 
