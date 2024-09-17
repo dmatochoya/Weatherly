@@ -63,6 +63,8 @@ export const weatherSlice = createSlice({
           state.currentWeather!.pop = todayForecast.pop;
 
           dailyForecast = dailyForecast.slice(todayForecastIndex + 1);
+        } else {
+          state.currentWeather!.pop = 0;
         }
 
         state.forecastWeather = dailyForecast;
