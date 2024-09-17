@@ -1,12 +1,12 @@
 {
   "functions": {
-    "api/*.cjs": {
+    "api/*.ts": {
       "maxDuration": 10
     }
   },
   "builds": [
     {
-      "src": "api/*.cjs",
+      "src": "api/*.ts",
       "use": "@vercel/node"
     }
   ]

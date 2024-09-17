@@ -1,6 +1,6 @@
-const fetch = require("node-fetch");
+import { VercelRequest, VercelResponse } from "@vercel/node";
 
-module.exports = async function (req, res) {
+module.exports = async function (req: VercelRequest, res: VercelResponse) {
   const city = req.query.city;
   const apiKey = process.env.API_KEY;
   console.log("API_KEY", process.env.API_KEY);
