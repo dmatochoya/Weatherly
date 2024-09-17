@@ -46,10 +46,8 @@ function SearchWeather() {
       if (coordinatesResponse.length > 0) {
         const { lon, lat } = coordinatesResponse[0];
 
-        await Promise.all([
-          getCurrentWeather({ lon, lat }).unwrap(),
-          getForecastWeather({ lon, lat }).unwrap(),
-        ]);
+        await getCurrentWeather({ lon, lat }).unwrap();
+        await getForecastWeather({ lon, lat }).unwrap();
 
         if (isHomePage) {
           navigate("/weather");
