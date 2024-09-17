@@ -4,18 +4,10 @@
       "maxDuration": 10
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/api/.*",
-      "dest": "/api"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/404",
-      "status": 404
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
