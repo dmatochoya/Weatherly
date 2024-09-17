@@ -62,7 +62,3 @@ VITE_API_KEY=your_openweather_api_key_here
 ```bash
 npm run dev
 ```
-
-## License
-
-This project is licensed under the MIT License.
