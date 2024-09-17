@@ -23,7 +23,7 @@ export function reduceToDailyForecast(
     }
   > = {};
 
-  data.forEach((entry) => {
+  data?.forEach((entry) => {
     const date = entry.dt_txt!.split(" ")[0]; // Extract the date part (YYYY-MM-DD)
     const iconNumber = entry.weather[0].icon.slice(0, -1); // Extract icon number (remove 'd' or 'n')
     const description = entry.weather[0].description; // Get the description
