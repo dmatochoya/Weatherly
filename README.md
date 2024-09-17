@@ -1,6 +1,6 @@
 # Weatherly
 
-Weatherly is a weather forecasting application built with React, TypeScript, and Modern Redux (RTK), with integrations to OpenWeather API for fetching real-time weather data and forecasts. The project is deployed on Vercel, leveraging serverless functions to securely manage the API key for OpenWeather.
+Weatherly is a weather forecast application built with React, TypeScript, and Modern Redux (RTK), leveraging RTK Query for data fetching. The app interacts with the OpenWeather API to provide current and forecast weather data for a searched city. The project is deployed on Vercel, leveraging serverless functions to securely manage the API key for OpenWeather.
 
 ## Features
 
@@ -12,13 +12,12 @@ Weatherly is a weather forecasting application built with React, TypeScript, and
 
 ## Live Demo
 
-The app is deployed on Vercel and can be accessed at:  
-[Weatherly](https://weatherlytoday.vercel.app/)
+The app is deployed on Vercel and can be accessed at: [Weatherly](https://weatherlytoday.vercel.app/)
 
 ## Tech Stack
 
 - **React** (with `vite` scaffolding)
-- **TypeScript**: Type safety
+- **TypeScript**: For type safety
 - **Redux Toolkit (RTK)**: For managing global state
 - **RTK Query**: For handling data fetching
 - **styled-components**: For styling
@@ -48,7 +47,7 @@ The app is deployed on Vercel and can be accessed at:
    npm install
    ```
 
-3. Set up environment variables:
+3. Set up environment variable:
 
 In the root directory, copy the .env.example file to .env:
 
@@ -57,8 +56,7 @@ cp .env.example .env
 ```
 
 You can obtain your API key by signing up at [OpenWeather](https://openweathermap.org/).
-
-Then, add your OpenWeather API key in the .env file:
+Then, add your API key in the .env file:
 
 ```bash
 VITE_API_KEY=your_openweather_api_key_here
