@@ -1,6 +1,7 @@
+import fetch from "node-fetch";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   const city = req.query.city as string;
   const apiKey = process.env.API_KEY;
   console.log("API_KEY", process.env.API_KEY);
@@ -17,7 +18,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (response.ok) {
       res.status(200).json(data);
     } else {
-      res.status(response.status).json({ error: data.message });
+      res.status(response.status).json({ error: "An error occurred" });
     }
   } catch (error) {
     console.error(error);
