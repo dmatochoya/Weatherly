@@ -18,7 +18,7 @@ module.exports = async function (req: VercelRequest, res: VercelResponse) {
     const data = (await response.json()) as ForecastWeatherApiResponse;
 
     if (response.ok) {
-      res.status(200).json(data.list); // Only return the forecast list
+      res.status(200).json(data);
     } else {
       res.status(response.status).json({ error: "An error occurred" });
     }
