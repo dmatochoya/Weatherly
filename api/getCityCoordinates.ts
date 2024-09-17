@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-export default async function (req: VercelRequest, res: VercelResponse) {
+module.exports = async function (req: VercelRequest, res: VercelResponse) {
   const city = req.query.city as string;
   const apiKey = process.env.API_KEY;
   console.log("API_KEY", process.env.API_KEY);
@@ -24,4 +24,4 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
