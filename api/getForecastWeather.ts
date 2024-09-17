@@ -1,4 +1,7 @@
-module.exports = async function (req, res) {
+import { VercelRequest, VercelResponse } from "@vercel/node";
+import type { ForecastWeatherApiResponse } from "../src/types/apiTypes";
+
+module.exports = async function (req: VercelRequest, res: VercelResponse) {
   const { lat, lon } = req.query;
   const apiKey = process.env.API_KEY;
 
@@ -12,12 +15,12 @@ module.exports = async function (req, res) {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
     );
-    const data = await response.json();
+    const data = (await response.json()) as ForecastWeatherApiResponse;
 
     if (response.ok) {
       res.status(200).json(data.list); // Only return the forecast list
     } else {
-      res.status(response.status).json({ error: data.message });
+      res.status(response.status).json({ error: "An error occurred" });
     }
   } catch (error) {
     console.error(error);

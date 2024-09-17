@@ -20,9 +20,9 @@
   },
   "include": [
     "vite.config.ts",
-    "api/**/*.cjs",
-    "api/getForecastWeather.cjs",
-    "api/getCurrentWeather.cjs",
-    "api/getCityCoordinates.cjs"
+    "api/**/*.ts",
+    "api/getCityCoordinates.ts",
+    "api/getCurrentWeather.ts",
+    "api/getForecastWeather.ts"
   ]
 }
