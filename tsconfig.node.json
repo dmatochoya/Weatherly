@@ -21,8 +21,8 @@
   "include": [
     "vite.config.ts",
     "api/**/*.cjs",
-    "api/getForecastWeather.ts",
-    "api/getCurrentWeather.ts",
-    "api/getCityCoordinates.ts"
+    "api/getForecastWeather.cjs",
+    "api/getCurrentWeather.cjs",
+    "api/getCityCoordinates.cjs"
   ]
 }

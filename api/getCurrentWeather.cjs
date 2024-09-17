@@ -1,6 +1,4 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
-
-module.exports = async function (req: VercelRequest, res: VercelResponse) {
+module.exports = async function (req, res) {
   const { lat, lon } = req.query;
   const apiKey = process.env.API_KEY;
 
