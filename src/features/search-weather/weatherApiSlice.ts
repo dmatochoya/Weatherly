@@ -15,7 +15,9 @@ interface BuildEndpointParams {
 }
 
 const buildEndpoint = ({ coords, apiCallType }: BuildEndpointParams) =>
-  `data/2.5/${apiCallType}?lat=${coords.lat}&lon=${coords.lon}&units=metric&appid=${apiKey}`;
+  isLocal
+    ? `data/2.5/${apiCallType}?lat=${coords.lat}&lon=${coords.lon}&units=metric&appid=${apiKey}` // OpenWeather API direct call for local development
+    : `getWeatherData?lat=${coords.lat}&lon=${coords.lon}&apiCallType=${apiCallType}`; // Serverless function in production
 
 export const weatherApiSlice = createApi({
   baseQuery: fetchBaseQuery({
@@ -30,19 +32,13 @@ export const weatherApiSlice = createApi({
           : `getCityCoordinates?city=${city}`, // Use serverless function in production
     }),
     getCurrentWeather: builder.query<CurrentWeatherApiResponse, Coordinates>({
-      query: (coords) =>
-        isLocal
-          ? buildEndpoint({ coords, apiCallType: "weather" }) // Direct OpenWeather API call
-          : `getCurrentWeather?lat=${coords.lat}&lon=${coords.lon}&apiCallType=weather`, // Serverless function in production
+      query: (coords) => buildEndpoint({ coords, apiCallType: "weather" }),
     }),
     getForecastWeather: builder.query<
       ForecastWeatherApiResponse["list"],
       Coordinates
     >({
-      query: (coords) =>
-        isLocal
-          ? buildEndpoint({ coords, apiCallType: "forecast" }) // Direct API call in development
-          : `getForecastWeather?lat=${coords.lat}&lon=${coords.lon}&apiCallType=forecast`, // Serverless function in production
+      query: (coords) => buildEndpoint({ coords, apiCallType: "forecast" }),
       transformResponse: (response: ForecastWeatherApiResponse) =>
         response.list,
     }),
