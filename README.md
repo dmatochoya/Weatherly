@@ -25,14 +25,9 @@ The app is deployed on Vercel and can be accessed at: [Weatherly](https://weathe
 - **react-error-boundary**: For handling errors
 - **Vercel**: For hosting
 
-## Setup
+## Setup and Installation
 
-### Prerequisites
-
-- Node.js
-- npm or yarn
-
-### Installation
+To get a local copy of the project up and running, follow these steps:
 
 1. Clone the repository:
 
