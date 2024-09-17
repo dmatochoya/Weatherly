@@ -22,7 +22,6 @@
     "vite.config.ts",
     "api/**/*.ts",
     "api/getCityCoordinates.ts",
-    "api/getCurrentWeather.ts",
-    "api/getForecastWeather.ts"
+    "api/getWeatherData.ts"
   ]
 }

@@ -33,7 +33,7 @@ export const weatherApiSlice = createApi({
       query: (coords) =>
         isLocal
           ? buildEndpoint({ coords, apiCallType: "weather" }) // Direct OpenWeather API call
-          : `getCurrentWeather?lat=${coords.lat}&lon=${coords.lon}`, // Serverless function in production
+          : `getCurrentWeather?lat=${coords.lat}&lon=${coords.lon}&apiCallType=weather`, // Serverless function in production
     }),
     getForecastWeather: builder.query<
       ForecastWeatherApiResponse["list"],
@@ -42,7 +42,7 @@ export const weatherApiSlice = createApi({
       query: (coords) =>
         isLocal
           ? buildEndpoint({ coords, apiCallType: "forecast" }) // Direct API call in development
-          : `getForecastWeather?lat=${coords.lat}&lon=${coords.lon}`, // Serverless function in production
+          : `getForecastWeather?lat=${coords.lat}&lon=${coords.lon}&apiCallType=forecast`, // Serverless function in production
       transformResponse: (response: ForecastWeatherApiResponse) =>
         response.list,
     }),
