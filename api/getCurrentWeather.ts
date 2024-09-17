@@ -1,4 +1,4 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 module.exports = async function (req: VercelRequest, res: VercelResponse) {
   const { lat, lon } = req.query;

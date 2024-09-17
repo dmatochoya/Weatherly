@@ -1,4 +1,4 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import type { ForecastWeatherApiResponse } from "../src/types/apiTypes";
 
 module.exports = async function (req: VercelRequest, res: VercelResponse) {
