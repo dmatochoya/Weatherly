@@ -14,7 +14,7 @@ import { store } from "./app/store";
 import theme from "./styles/theme";
 import GlobalStyle from "./styles/GlobalStyle";
 import GlobalErrorFallback from "./common/components/GlobalErrorFallback";
-import NotFoundPage from "./pages/404";
+import NotFoundPage from "./pages/NotFoundPage";
 import Home from "./pages/Home/Home";
 import WeatherDashboard from "./pages/WeatherDashboard/WeatherDashboard";
 
