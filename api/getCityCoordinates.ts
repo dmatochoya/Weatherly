@@ -3,7 +3,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const city = req.query.city as string;
   const apiKey = process.env.API_KEY;
-
+  console.log("API_KEY", process.env.API_KEY);
   if (!city || !apiKey) {
     return res.status(400).json({ error: "City and API key are required" });
   }
