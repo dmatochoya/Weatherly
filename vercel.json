@@ -3,5 +3,11 @@
     "api/*.cjs": {
       "maxDuration": 10
     }
-  }
+  },
+  "builds": [
+    {
+      "src": "api/*.cjs",
+      "use": "@vercel/node"
+    }
+  ]
 }
