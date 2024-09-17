@@ -1,50 +1,75 @@
-# React + TypeScript + Vite
+# Weatherly
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Weatherly is a weather forecasting application built with React, TypeScript, and Modern Redux (RTK), with integrations to OpenWeather API for fetching real-time weather data and forecasts. The project is deployed on Vercel, leveraging serverless functions to securely manage the API key for OpenWeather.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **City Search**: Search for any city to view its weather conditions.
+- **Weather Dashboard**: After searching for a city, you're presented with current weather data and an up-to 6-day forecast.
+- **Temperature Unit Toggle**: Switch between Celsius and Fahrenheit units.
+- **Error Handling**: Managed using `react-error-boundary` for a robust user experience.
+- **Serverless Functions**: Serverless functions are deployed in Vercel to prevent exposure of the OpenWeather API key in the frontend.
 
-## Expanding the ESLint configuration
+## Live Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The app is deployed on Vercel and can be accessed at:  
+[Weatherly](https://weatherlytoday.vercel.app/)
 
-- Configure the top-level `parserOptions` property like this:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **React** (with `vite` scaffolding)
+- **TypeScript**: Type safety
+- **Redux Toolkit (RTK)**: For managing global state
+- **RTK Query**: For handling data fetching
+- **styled-components**: For styling
+- **react-router-dom**: For routing
+- **react-error-boundary**: For handling errors
+- **Vercel**: For hosting
+
+## Setup
+
+### Prerequisites
+
+- Node.js
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/dmatochoya/Weatherly.git
+   cd weatherly
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+
+In the root directory, copy the .env.example file to .env:
+
+```bash
+cp .env.example .env
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+You can obtain your API key by signing up at [OpenWeather](https://openweathermap.org/).
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Then, add your OpenWeather API key in the .env file:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+VITE_API_KEY=your_openweather_api_key_here
 ```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+## License
+
+This project is licensed under the MIT License.
