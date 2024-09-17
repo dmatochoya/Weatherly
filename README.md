@@ -1,6 +1,6 @@
 # Weatherly
 
-Weatherly is a weather forecast application built with React, TypeScript, and Modern Redux (RTK), leveraging RTK Query for data fetching. The app interacts with the OpenWeather API to provide current and forecast weather data for a searched city. The project is deployed on Vercel, leveraging serverless functions to securely manage the API key for OpenWeather.
+Weatherly is a weather forecast application built with React, TypeScript, styled-components, and Modern Redux (RTK), leveraging RTK Query for data fetching. The app interacts with the OpenWeather API to provide current and forecast weather data for a searched city. The project is deployed on Vercel, leveraging serverless functions to securely manage the API key for OpenWeather.
 
 ## Features
 
