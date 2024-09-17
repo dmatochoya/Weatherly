@@ -33,7 +33,7 @@ To get a local copy of the project up and running, follow these steps:
 
    ```bash
    git clone https://github.com/dmatochoya/Weatherly.git
-   cd weatherly
+   cd Weatherly
    ```
 
 2. Install the dependencies:
