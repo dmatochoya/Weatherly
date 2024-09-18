@@ -19,9 +19,18 @@ function SearchWeather() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
-  const [getCityCoordinates] = useLazyGetCityCoordinatesQuery();
-  const [getCurrentWeather] = useLazyGetCurrentWeatherQuery();
-  const [getForecastWeather] = useLazyGetForecastWeatherQuery();
+  const [getCityCoordinates, { isFetching: isFetchingCityData }] =
+    useLazyGetCityCoordinatesQuery();
+  const [getCurrentWeather, { isFetching: isFetchingCurrentWeather }] =
+    useLazyGetCurrentWeatherQuery();
+  const [getForecastWeather, { isFetching: isFetchingForecastWeather }] =
+    useLazyGetForecastWeatherQuery();
+
+  const isFetching = [
+    isFetchingCityData,
+    isFetchingCurrentWeather,
+    isFetchingForecastWeather,
+  ].some(Boolean);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -38,8 +47,6 @@ function SearchWeather() {
       return;
     }
 
-    setSearchTerm("");
-
     try {
       const coordinatesResponse = await getCityCoordinates(searchTerm).unwrap();
 
@@ -48,6 +55,8 @@ function SearchWeather() {
 
         await getCurrentWeather({ lon, lat }).unwrap();
         await getForecastWeather({ lon, lat }).unwrap();
+
+        setSearchTerm("");
 
         if (isHomePage) {
           navigate("/weather");
@@ -94,7 +103,9 @@ function SearchWeather() {
           The information was not valid
         </Styled.InputErrorHelperText>
       </Styled.SearchInputContainer>
-      <Styled.Common.Button onClick={handleSearch}>Search</Styled.Common.Button>
+      <Styled.Common.Button onClick={handleSearch} disabled={isFetching}>
+        {isFetching ? <Styled.ButtonSpinner /> : "Search"}
+      </Styled.Common.Button>
     </>
   );
 }

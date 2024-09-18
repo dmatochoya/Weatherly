@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import searchIcon from "../../assets/search.svg";
 
 export const AppTitle = styled.h1<{ $fontSize: string; $isClickable: boolean }>`
@@ -49,7 +49,11 @@ export const SearchInput = styled.input.attrs<{ $isError: boolean }>({
   }
 
   ${({ $isError, theme }) =>
-    $isError && `border: 2px solid ${theme.colors.error}`}
+    $isError &&
+    css`
+      border: 2px solid ${theme.colors.error};
+      color: ${theme.colors.error};
+    `}
 `;
 
 export const InputErrorHelperText = styled.span`
@@ -58,4 +62,18 @@ export const InputErrorHelperText = styled.span`
   font-weight: 300;
   color: ${({ theme }) => theme.colors.error};
   padding: 0.3rem 0 0 1.3rem;
+`;
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+export const ButtonSpinner = styled.div`
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+  animation: ${spin} 0.9s linear infinite;
 `;
