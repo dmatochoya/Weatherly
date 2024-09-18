@@ -13,24 +13,16 @@ const Styled = { ...StyledSearch, Common: { ...StyledCommon } };
 
 function SearchWeather() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
   const [isInputError, setIsInputError] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
-  const [getCityCoordinates, { isFetching: isFetchingCityData }] =
-    useLazyGetCityCoordinatesQuery();
-  const [getCurrentWeather, { isFetching: isFetchingCurrentWeather }] =
-    useLazyGetCurrentWeatherQuery();
-  const [getForecastWeather, { isFetching: isFetchingForecastWeather }] =
-    useLazyGetForecastWeatherQuery();
-
-  const isFetching = [
-    isFetchingCityData,
-    isFetchingCurrentWeather,
-    isFetchingForecastWeather,
-  ].some(Boolean);
+  const [getCityCoordinates] = useLazyGetCityCoordinatesQuery();
+  const [getCurrentWeather] = useLazyGetCurrentWeatherQuery();
+  const [getForecastWeather] = useLazyGetForecastWeatherQuery();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -46,6 +38,8 @@ function SearchWeather() {
       setIsInputError(true);
       return;
     }
+
+    setIsFetching(true);
 
     try {
       const coordinatesResponse = await getCityCoordinates(searchTerm).unwrap();
@@ -72,6 +66,8 @@ function SearchWeather() {
       console.error(errorMessage);
 
       setIsInputError(true);
+    } finally {
+      setIsFetching(false);
     }
   };
 
