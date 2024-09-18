@@ -13,7 +13,10 @@ export const Header = styled.header<{ $isScrolled: boolean }>`
   transition: box-shadow 0.3s ease;
 
   ${({ $isScrolled }) =>
-    $isScrolled && "box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)"}
+    $isScrolled &&
+    css`
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    `}
 `;
 
 export const Main = styled.main`
@@ -94,7 +97,7 @@ export const ForecastWeatherFlexCard = styled(Flex)`
   height: 4.87rem;
   background: ${({ theme }) => {
     const { primary, secondary } = theme.colors;
-    return `linear-gradient(90deg, ${secondary} 0%, ${primary} 100%);`;
+    return css`linear-gradient(90deg, ${secondary} 0%, ${primary} 100%);`;
   }};
   padding: 0 1.9rem;
   border: 1px solid ${({ theme }) => theme.colors.lightgray};
