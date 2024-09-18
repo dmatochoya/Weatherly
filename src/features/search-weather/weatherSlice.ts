@@ -53,7 +53,7 @@ export const weatherSlice = createSlice({
       weatherApiSlice.endpoints.getForecastWeather.matchFulfilled,
       (state, action) => {
         const cityCurrentIsoDate =
-          state.currentWeather?.formattedDate.isoDate ?? "";
+          state.stagingData!.currentWeather?.formattedDate.isoDate ?? "";
 
         let dailyForecast = reduceToDailyForecast(action.payload);
 
