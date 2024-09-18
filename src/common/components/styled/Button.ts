@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.25rem;
   font-weight: 700;
   color: #fff;
@@ -12,6 +15,11 @@ const Button = styled.button`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.hover};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.lightgray};
+    cursor: not-allowed;
   }
 `;
 
