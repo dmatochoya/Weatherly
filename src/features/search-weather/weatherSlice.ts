@@ -12,6 +12,7 @@ const initialState: WeatherSliceState = {
   },
   currentWeather: null,
   forecastWeather: null,
+  stagingData: null,
 };
 
 export const weatherSlice = createSlice({
@@ -29,9 +30,11 @@ export const weatherSlice = createSlice({
         }
 
         const { name, country: countryCode } = cityData;
-        state.cityData = {
-          name,
-          country: getCountryName(countryCode),
+        state.stagingData = {
+          cityData: {
+            name,
+            country: getCountryName(countryCode),
+          },
         };
       }
     );
@@ -40,7 +43,7 @@ export const weatherSlice = createSlice({
       (state, action) => {
         const { dt: timestamp, timezone: timezoneOffset } = action.payload;
 
-        state.currentWeather = {
+        state.stagingData!.currentWeather = {
           ...action.payload,
           formattedDate: formatDateFromTimestamp(timestamp, timezoneOffset),
         };
@@ -60,14 +63,18 @@ export const weatherSlice = createSlice({
 
         if (todayForecastIndex !== -1) {
           const todayForecast = dailyForecast[todayForecastIndex];
-          state.currentWeather!.pop = todayForecast.pop;
+          state.stagingData!.currentWeather!.pop = todayForecast.pop;
 
           dailyForecast = dailyForecast.slice(todayForecastIndex + 1);
         } else {
-          state.currentWeather!.pop = 0;
+          state.stagingData!.currentWeather!.pop = 0;
         }
 
+        const { cityData, currentWeather } = state.stagingData!;
+        state.cityData = cityData;
+        state.currentWeather = currentWeather;
         state.forecastWeather = dailyForecast;
+        state.stagingData = null;
       }
     );
   },

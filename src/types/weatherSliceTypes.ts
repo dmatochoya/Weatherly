@@ -13,8 +13,13 @@ interface WeatherSliceState {
   };
   currentWeather:
     | (CurrentWeatherApiResponse & { formattedDate: FormattedDate })
-    | null;
+    | null
+    | undefined;
   forecastWeather: ForecastWeatherApiResponse["list"] | null;
+  stagingData: null | {
+    cityData: WeatherSliceState["cityData"];
+    currentWeather?: WeatherSliceState["currentWeather"];
+  };
 }
 
 export default WeatherSliceState;
