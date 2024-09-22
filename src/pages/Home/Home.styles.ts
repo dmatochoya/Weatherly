@@ -6,5 +6,4 @@ export const Section = styled.section`
   justify-content: center;
   align-items: center;
   gap: 1.6rem;
-  height: 100vh;
 `;

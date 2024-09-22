@@ -10,7 +10,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: clamp(8px, calc(8px + 0.6vw), 16px)
+    font-size: clamp(8px, calc(8px + 0.6vw), 16px);
+    height: 100%;
   }
 
   body {
