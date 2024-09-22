@@ -101,7 +101,7 @@ export const InputErrorHelperText = styled.span`
   padding: 0.3rem 0 0 1.3rem;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 0.9;
+    font-size: 0.9rem;
   }
 `;
 
