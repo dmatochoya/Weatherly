@@ -28,7 +28,7 @@ function SearchWeather() {
     const newValue = e.target.value;
     setSearchTerm(newValue);
 
-    if (isInputError && newValue.length > 0) {
+    if (isInputError) {
       setIsInputError(false);
     }
   };
