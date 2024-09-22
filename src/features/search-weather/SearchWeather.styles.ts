@@ -53,7 +53,7 @@ export const SearchInput = styled.input.attrs<SearchInputProps>({
   placeholder: "Search for a city...",
   name: "citySearch",
 })`
-  font-size: 1.17rem;
+  font-size: 1.2rem;
   width: 30rem;
   height: 2.813rem;
   padding: 1.25rem;
@@ -87,14 +87,22 @@ export const SearchInput = styled.input.attrs<SearchInputProps>({
         width: 22rem;
       `}
   }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 1.17rem;
+  }
 `;
 
 export const InputErrorHelperText = styled.span`
   font-family: ${({ theme }) => theme.fontFamily.error};
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 300;
   color: ${({ theme }) => theme.colors.error};
   padding: 0.3rem 0 0 1.3rem;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: 0.9;
+  }
 `;
 
 const spin = keyframes`
