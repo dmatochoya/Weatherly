@@ -12,7 +12,13 @@ const theme: DefaultTheme = {
     background: "#F4F4F5",
     text: "#26272B",
     error: "#DB2351",
-    lightgray: "#9FA2AB",
+    lightGray: "#9FA2AB",
+  },
+  breakpoints: {
+    mobile: "425px",
+    tablet: "768px",
+    laptop: "1024px",
+    desktop: "1440px",
   },
 };
 

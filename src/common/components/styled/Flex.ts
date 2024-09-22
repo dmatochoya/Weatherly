@@ -13,6 +13,7 @@ interface FlexProps {
   $alignItems?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
   $flexWrap?: "wrap" | "nowrap" | "wrap-reverse";
   $gap?: CSSProperties["gap"];
+  $flex?: CSSProperties["flex"];
 }
 
 const Flex = styled.div<FlexProps>`
@@ -22,6 +23,7 @@ const Flex = styled.div<FlexProps>`
   align-items: ${({ $alignItems }) => $alignItems};
   flex-wrap: ${({ $flexWrap }) => $flexWrap};
   gap: ${({ $gap }) => $gap};
+  flex: ${({ $flex }) => $flex};
 `;
 
 export default Flex;

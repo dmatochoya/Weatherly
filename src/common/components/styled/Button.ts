@@ -7,6 +7,7 @@ const Button = styled.button`
   font-size: 1.25rem;
   font-weight: 700;
   color: #fff;
+  width: 30rem;
   min-width: 9.2rem;
   height: 2.8rem;
   border-radius: 50px;
@@ -18,8 +19,12 @@ const Button = styled.button`
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.lightgray};
+    background-color: ${({ theme }) => theme.colors.lightGray};
     cursor: not-allowed;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: auto;
   }
 `;
 

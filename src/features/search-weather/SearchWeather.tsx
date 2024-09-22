@@ -81,19 +81,14 @@ function SearchWeather() {
 
   return (
     <>
-      <Styled.AppTitle
-        $fontSize={isHomePage ? "6.5rem" : "2.6rem"}
-        $isClickable={!isHomePage}
-        onClick={handleAppTitleClick}
-      >
-        Weatherly
-      </Styled.AppTitle>
+      <Styled.AppTitle $isHomePage={isHomePage} onClick={handleAppTitleClick} />
       <Styled.SearchInputContainer>
         <Styled.SearchIcon />
         <Styled.SearchInput
           value={searchTerm}
           onChange={handleInputChange}
           $isError={isInputError}
+          $isHomePage={isHomePage}
         />
         <Styled.InputErrorHelperText hidden={!isInputError}>
           The information was not valid

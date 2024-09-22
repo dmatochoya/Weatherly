@@ -1,14 +1,33 @@
 import styled, { css, keyframes } from "styled-components";
 import searchIcon from "../../assets/search.svg";
 
-export const AppTitle = styled.h1<{ $fontSize: string; $isClickable: boolean }>`
-  font-size: ${({ $fontSize }) => $fontSize};
+const mediaQueryBetweenMobileAndTablet = css`
+  ${({ theme }) =>
+    `@media (min-width: ${theme.breakpoints.mobile}) and (max-width: ${theme.breakpoints.tablet})`}
+`;
+
+export const AppTitle = styled.h1<{ $isHomePage: boolean }>`
+  font-size: ${({ $isHomePage }) => ($isHomePage ? "6.5rem" : "2.6rem")};
   font-weight: 700;
   background: linear-gradient(93deg, #136aab 1.87%, #b0e0f5 96.48%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  cursor: ${({ $isClickable }) => $isClickable && "pointer"};
+  cursor: ${({ $isHomePage }) => !$isHomePage && "pointer"};
+
+  &::before {
+    content: "Weatherly";
+  }
+
+  ${mediaQueryBetweenMobileAndTablet} {
+    &::before {
+      ${({ $isHomePage }) =>
+        !$isHomePage &&
+        css`
+          content: "W";
+        `}
+    }
+  }
 `;
 
 export const SearchInputContainer = styled.div`
@@ -19,11 +38,17 @@ export const SearchInputContainer = styled.div`
 
 export const SearchIcon = styled.img.attrs({ src: searchIcon })`
   position: absolute;
-  top: 0.75rem;
+  top: 0.7rem;
   left: 1rem;
+  width: 1.5rem;
 `;
 
-export const SearchInput = styled.input.attrs<{ $isError: boolean }>({
+interface SearchInputProps {
+  $isError: boolean;
+  $isHomePage: boolean;
+}
+
+export const SearchInput = styled.input.attrs<SearchInputProps>({
   type: "search",
   placeholder: "Search for a city...",
   name: "citySearch",
@@ -32,7 +57,7 @@ export const SearchInput = styled.input.attrs<{ $isError: boolean }>({
   width: 30rem;
   height: 2.813rem;
   padding: 1.25rem;
-  padding-left: 2.55rem;
+  padding-left: 2.6rem;
   border-radius: 50px;
   border: 2px double transparent;
   background-image: linear-gradient(white, white),
@@ -54,6 +79,14 @@ export const SearchInput = styled.input.attrs<{ $isError: boolean }>({
       border: 2px solid ${theme.colors.error};
       color: ${theme.colors.error};
     `}
+
+  ${mediaQueryBetweenMobileAndTablet} {
+    ${({ $isHomePage }) =>
+      !$isHomePage &&
+      css`
+        width: 22rem;
+      `}
+  }
 `;
 
 export const InputErrorHelperText = styled.span`

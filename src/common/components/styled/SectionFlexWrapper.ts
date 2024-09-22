@@ -11,8 +11,8 @@ const SectionFlexWrapper = styled.section<SectionFlexWrapperProps>`
   align-items: center;
   gap: 1rem;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
-  padding-bottom: 4.5rem;
   padding: ${({ $padding }) => $padding};
+  padding-bottom: 4.5rem;
 `;
 
 export default SectionFlexWrapper;

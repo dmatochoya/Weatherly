@@ -36,18 +36,32 @@ function ForecastWeather({ currentTempUnit }: ForecastWeatherProps) {
         }) => (
           <Styled.ForecastWeatherFlexCard
             key={timestamp}
-            $justifyContent="space-between"
+            $flexDirection="column"
             $alignItems="center"
           >
-            <time>{formatDateFromTimestamp(timestamp).shortDate}</time>
-            <Styled.Common.Flex $alignItems="center">
-              <img src={getWeatherIconUrl(icon + "d")} alt={description} />
-              {convertTemperature(temp_max, currentTempUnit)}° /{" "}
-              {convertTemperature(temp_min, currentTempUnit)}°
+            <Styled.Common.Flex $flex={1}>
+              <time>{formatDateFromTimestamp(timestamp).shortDate}</time>
             </Styled.Common.Flex>
-            <Styled.Common.Flex $alignItems="center">
-              <img src={getWeatherIconUrl("09d")} alt="Rain icon" />
-              {percentOfPrecipit}%
+            <Styled.Common.Flex
+              $flex={2}
+              $justifyContent="space-between"
+              $gap="2rem"
+            >
+              <Styled.Common.Flex $alignItems="center">
+                <Styled.ForecastIcon
+                  src={getWeatherIconUrl(icon + "d")}
+                  alt={description}
+                />
+                {convertTemperature(temp_max, currentTempUnit)}° /{" "}
+                {convertTemperature(temp_min, currentTempUnit)}°
+              </Styled.Common.Flex>
+              <Styled.Common.Flex $alignItems="center">
+                <Styled.ForecastIcon
+                  src={getWeatherIconUrl("09d")}
+                  alt="Rain icon"
+                />
+                {percentOfPrecipit}%
+              </Styled.Common.Flex>
             </Styled.Common.Flex>
           </Styled.ForecastWeatherFlexCard>
         )

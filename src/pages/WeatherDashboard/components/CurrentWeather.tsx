@@ -30,12 +30,12 @@ function CurrentWeather({
   );
 
   return (
-    <Styled.Common.SectionFlexWrapper>
+    <Styled.Common.SectionFlexWrapper $padding="0 3rem">
       <Styled.Common.SectionTitle $padding="2rem 0">
         {currentWeather?.formattedDate.shortDate}.
         <span>{` ${cityData.name}, ${cityData.country}`}</span>
       </Styled.Common.SectionTitle>
-      <Styled.Common.Flex $justifyContent="center" $gap="1rem">
+      <Styled.Common.Flex $justifyContent="center" $gap="1rem" $flexWrap="wrap">
         <Styled.MainWeatherCard>
           <Styled.MainWeatherCardNowText>NOW</Styled.MainWeatherCardNowText>
           <Styled.MainWeatherCardIcon
@@ -53,7 +53,11 @@ function CurrentWeather({
             Change to {currentTempUnit === "C" ? "F" : "C"}°
           </Styled.ChangeTempUnitButton>
         </Styled.MainWeatherCard>
-        <Styled.ItemWeatherCardsFlexContainer $flexWrap="wrap" $gap="1rem">
+        <Styled.ItemWeatherCardsFlexContainer
+          $justifyContent="center"
+          $flexWrap="wrap"
+          $gap="1rem"
+        >
           {currentWeatherCardsData.map(({ title, value, iconSrc }) => (
             <Styled.ItemWeatherCard key={title}>
               <div>
