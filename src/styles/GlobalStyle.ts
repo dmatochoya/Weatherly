@@ -9,11 +9,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  #root, html, body { height: 100%; }
+
   html {
     font-size: clamp(8px, calc(8px + 0.6vw), 16px);
-    height: 100%;
   }
-
+  
   body {
     font-family: ${({ theme }) => theme.fontFamily.main};
     background-color: ${({ theme }) => theme.colors.background};
