@@ -13,6 +13,7 @@ export const Header = styled.header<{ $isScrolled: boolean }>`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
     flex-direction: row;
+    align-items: stretch;
     position: fixed;
     top: 0;
     height: 5.97rem;
