@@ -23,6 +23,12 @@ const Button = styled.button`
     cursor: not-allowed;
   }
 
+  @media (hover: none) {
+    &:focus {
+      background-color: ${({ theme }) => theme.colors.primary};
+    }
+  }
+
   @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: auto;
   }
