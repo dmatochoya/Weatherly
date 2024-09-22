@@ -23,12 +23,7 @@ const GlobalStyle = createGlobalStyle`
   button {
     border: none;
     cursor: pointer;
-  }
-
-  @media (hover: none) {
-    button:focus {
-      outline: none;
-    }
+    -webkit-tap-highlight-color: transparent;
   }
 `;
 
