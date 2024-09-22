@@ -26,10 +26,6 @@ const Button = styled.button`
   @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: auto;
   }
-
-  @media (hover: none) {
-    background-color: ${({ theme }) => theme.colors.primary} !important;
-  }
 `;
 
 export default Button;
