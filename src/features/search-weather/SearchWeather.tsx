@@ -6,6 +6,7 @@ import {
   useLazyGetForecastWeatherQuery,
 } from "./weatherApiSlice";
 import useEnterKeyListener from "../../hooks/useEnterKeyListener";
+import useIOSFontFix from "../../hooks/useIOSFontFix";
 import * as StyledCommon from "../../common/components/styled";
 import * as StyledSearch from "./SearchWeather.styles";
 
@@ -72,6 +73,8 @@ function SearchWeather() {
   };
 
   useEnterKeyListener(handleSearch);
+
+  useIOSFontFix();
 
   const handleAppTitleClick = () => {
     if (!isHomePage) {
