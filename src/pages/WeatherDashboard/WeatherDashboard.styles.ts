@@ -124,6 +124,7 @@ export const ForecastWeatherFlexCard = styled(Flex)`
   div:not(:first-child) {
     color: #fff;
     font-weight: 700;
+    min-width: fit-content;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
