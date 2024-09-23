@@ -130,13 +130,13 @@ export const ForecastWeatherFlexCard = styled(Flex)`
     flex-direction: row;
     font-size: 1.2rem;
     width: 38rem;
-    height: 4.87rem;
+    height: 5.3rem;
     background: ${({ theme }) => getGradient(theme, "to right")};
     padding: 0 1.9rem;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 1.1rem;
+    width: 42rem;
   }
 `;
 

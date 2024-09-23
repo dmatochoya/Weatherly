@@ -40,7 +40,7 @@ export const SearchIcon = styled.img.attrs({ src: searchIcon })`
   position: absolute;
   top: 0.7rem;
   left: 1rem;
-  width: 1.5rem;
+  width: 1.4rem;
 `;
 
 interface SearchInputProps {
@@ -86,10 +86,6 @@ export const SearchInput = styled.input.attrs<SearchInputProps>({
       css`
         width: 22rem;
       `}
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: 1.17rem;
   }
 `;
 
