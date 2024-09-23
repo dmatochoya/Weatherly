@@ -136,7 +136,7 @@ export const ForecastWeatherFlexCard = styled(Flex)`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 42rem;
+    width: 41rem;
   }
 `;
 
